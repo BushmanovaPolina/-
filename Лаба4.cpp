@@ -17,7 +17,7 @@ public:
 	}
 	~Human() = default;
 	void output_human() {
-		std::cout << "ÔÈÎ ÷åëîâåêà - " << name << "\nÂîçðàñò ÷åëîâåêà - " << age;
+		std::cout << "Ð¤Ð˜Ðž Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ° - " << name << "\nÐ’Ð¾Ð·Ñ€Ð°ÑÑ‚ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ° - " << age;
 	}
 };
 class employee :virtual public Human{
@@ -36,7 +36,7 @@ public:
 	~employee() = default;
 	void output_employee() {
 		std::cout << "\n===================================================================================";
-		std::cout << "\nÄîëæíîñòü ñîòðóäíèêà - " << position << "\nÇàðïëàòà - " << salary << "$";
+		std::cout << "\nÐ”Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑŒ ÑÐ¾Ñ‚Ñ€ÑƒÐ´Ð½Ð¸ÐºÐ° - " << position << "\nÐ—Ð°Ñ€Ð¿Ð»Ð°Ñ‚Ð° - " << salary << "$";
 	}
 
 };
@@ -56,7 +56,7 @@ public:
 	~education() = default;
 	void output_education() {
 		std::cout << "\n===================================================================================";
-		std::cout << "\nÎáðàçîâàíèå\nÑôåðà - " << sphere << "\nÏåðèîä îáó÷åíèÿ - " << training_period;
+		std::cout << "\nÐžÐ±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ðµ\nÐ¡Ñ„ÐµÑ€Ð° - " << sphere << "\nÐŸÐµÑ€Ð¸Ð¾Ð´ Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸Ñ - " << training_period;
 	}
 };
 class company : virtual public employee {
@@ -75,7 +75,7 @@ public:
 	~company() = default;
 	void output_company() {
 		std::cout << "\n===================================================================================";
-		std::cout << "\nÒèï ïðåäïðèÿòèÿ - " << type << "\nÊîëè÷åñòâî ðàáîòíèêîâ - " << number;
+		std::cout << "\nÐ¢Ð¸Ð¿ Ð¿Ñ€ÐµÐ´Ð¿Ñ€Ð¸ÑÑ‚Ð¸Ñ - " << type << "\nÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ¾Ð² - " << number;
 	}
 };
 class work : virtual public education {
@@ -94,7 +94,7 @@ public:
 	~work() = default;
 	void output_work() {
 		std::cout << "\n===================================================================================";
-		std::cout << "\nÏðîôåññèÿ - " << profession << "\nÎïûò ðàáîòû - " << experiance;
+		std::cout << "\nÐŸÑ€Ð¾Ñ„ÐµÑÑÐ¸Ñ - " << profession << "\nÐžÐ¿Ñ‹Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ - " << experiance;
 	}
 };
 class otdel_kadrov :virtual public company, virtual public work {
@@ -122,7 +122,7 @@ public:
 	}
 	void output_otdel_kadrov() {
 		std::cout << "\n===================================================================================";
-		std::cout << "\nÊîëëè÷åñòâî ñâîáîäíûõ âàêàíñèé - " << amount_vacancies << "\nÑâîáîäíûå âàêàíñèè - "<<vacancy;
+		std::cout << "\nÐšÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ñ… Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¹ - " << amount_vacancies << "\nÐ¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ðµ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¸ - "<<vacancy;
 	}
 	~otdel_kadrov() = default;
 };
@@ -133,39 +133,39 @@ int input_int(int max) {
 	while (!(std::cin >> a) || a > max || a < 0) {
 		std::cin.clear();
 		std::cin.ignore(std::cin.rdbuf()->in_avail());
-		std::cout << "Ïîâòîðèòå ââîä\n";
+		std::cout << "ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ Ð²Ð²Ð¾Ð´\n";
 	};return a;
 }
 int main() {
 	system("chcp 1251>null");
-	std::cout << "Ââåäèòå ÔÈÎ ðàáîòíèêà - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¤Ð˜Ðž Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ° - ";
 	std::string fio;
 	std::cin >> fio;
-	std::cout << "Ââåäèòå âîçðàñò ðàáîòíèêà - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ° - ";
 	int age=input_int(100);
-	std::cout << "Ââåäèòå ñôåðó îáðàçîâàíèÿ - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ„ÐµÑ€Ñƒ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ - ";
 	std::string sf;
 	std::cin >> sf;
-	std::cout << "Ââåäèòå ïåðèîä îáó÷åíèÿ - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿ÐµÑ€Ð¸Ð¾Ð´ Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸Ñ - ";
 	int tp = input_int(age-16);
-	std::cout << "Ââåäèòå ïðîôåññèþ - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾Ñ„ÐµÑÑÐ¸ÑŽ - ";
 	std::string prof;
 	std::cin >> prof;
-	std::cout << "Ââåäèòå îïûò ðàáîòû - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ð¿Ñ‹Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ - ";
 	int exp = input_int(age - 16);
-	std::cout << "Ââåäèòå äîëæíîñòü - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑŒ - ";
 	std::string pos;
 	std::cin >> pos;
-	std::cout << "Ââåäèòå çàðïëàòó - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð°Ñ€Ð¿Ð»Ð°Ñ‚Ñƒ - ";
 	int s = input_int(10000000);
-	std::cout << "Ââåäèòå òèï ïðåäïðèÿòèÿ - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚Ð¸Ð¿ Ð¿Ñ€ÐµÐ´Ð¿Ñ€Ð¸ÑÑ‚Ð¸Ñ - ";
 	std::string t;
 	std::cin >> t;
-	std::cout << "Ââåäèòå êîë-âî ðàáîòíèêîâ íà ïðåäïðèÿòèè - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»-Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ð½Ð¸ÐºÐ¾Ð² Ð½Ð° Ð¿Ñ€ÐµÐ´Ð¿Ñ€Ð¸ÑÑ‚Ð¸Ð¸ - ";
 	int num = input_int(1000);
-	std::cout << "Ââåäèòå êîëè÷åñòâî ñâîáîäíûõ âàêàíñèé - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ñ… Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¹ - ";
 	int av = input_int(20);
-	std::cout << "Ââåäèòå ñâîáîäíûå âàêàíñèè - ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ñ‹Ðµ Ð²Ð°ÐºÐ°Ð½ÑÐ¸Ð¸ - ";
 	std::string v;
 	std::cin >> v;
 	otdel_kadrov otdel(v,av,prof,exp,t,num,sf,tp,s,pos,fio,age);
