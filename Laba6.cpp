@@ -6,7 +6,7 @@ template < typename T >
 int poisk(T *mas, T key,int size) {
 	for (int i = 0; i < size; i++)
 	{
-		if (mas[i] == key) return i;
+		if (mas[i] == key) return i+1;
 		i++;
 	}
 	return 0;
@@ -21,19 +21,23 @@ int poisk(char** mas,char* str,int size) {
 			if (mas[size][j] = str[j])
 				flg++;
 		}
-		if (flg == count)return i;
+		if (flg == count)return i+1;
 	}
 }
 template<typename T>
 	void output(T *arr, int size){
 		for (int i = 0; i < size; i++)
-			std::cout << arr[i] << " "
+			std::cout << arr[i] << " ";
 			std::cout << std::endl;
+	}
+	void output(char**ms, int size) {
+		for (int i = 0; i < size; i++)
+			std::cout << ms[i] << std::endl;
 	}
 	int main() {
 		system("chcp 1251> null");
 		std::cout << "Выберите тип данных с которым хотите работать : \n1-int\n2-float\n3-char*" << std::endl;
-		int answ = input_int(0,3);
+		int answ = input_int(0,4);
 		switch (answ-1) {
 		case 0: {
 			int s1 = input_int(0, 10);
@@ -43,6 +47,9 @@ template<typename T>
 			masi[i] = input_int(0, 1000);
 		}
 		output(masi, s1);
+		int ikei = input_int(0, 1000);
+		int g = poisk(masi, ikei, s1);
+		std::cout << g << std::endl;
 		delete[]masi; break;
 		}
 		case 1: {int s2 = input_int(0, 10);
@@ -52,17 +59,24 @@ template<typename T>
 			masf[i] = input_float(0, 1000);
 		}
 		output(masf, s2);
-		float d = 3;
-		int g=poisk(masf,d,s2);
+		float fkey = input_float(0,1000);
+		int g=poisk(masf,fkey,s2);
 		std::cout << "\n" << g;
 		delete[]masf;
 		break; }
-			case2: {int s3 = input_int(0, 10);
-				char* ms[10];
-		ms[10] = new char[s3];
-		for (int i = 0; i < s3; i++) {
-			std::cin >> ms[i][10];
-		}
+		case 2: {int s3 = input_int(0, 10);
+				char** ms;
+				ms = new char*[s3]; 
+				std::cin.clear();
+				std::cin.ignore(std::cin.rdbuf()->in_avail());
+				for (int i = 0; i < s3; i++)
+				{ms[i] = new char[10];
+				std::cin >> ms[i];
+				}
+				char* ckey = new char[10];
+				std::cin >> ckey;
+				int c = poisk(ms, ckey, s3);
+		output(ms, s3);
 		delete[]ms;
 		break; }
 		}
