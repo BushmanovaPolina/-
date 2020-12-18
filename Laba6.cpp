@@ -24,33 +24,48 @@ int poisk(char** mas,char* str,int size) {
 		if (flg == count)return i;
 	}
 }
+template<typename T>
+	void output(T *arr, int size){
+		for (int i = 0; i < size; i++)
+			std::cout << arr[i] << " "
+			std::cout << std::endl;
+	}
 	int main() {
 		system("chcp 1251> null");
-		int s1 = input_int(0, 10);
-		int s2 = input_int(0, 10);
-		int s3 = input_int(0, 10);
-		int* masi;
+		std::cout << "Ğ’Ñ‹Ğ±ĞµÑ€Ğ¸Ñ‚Ğµ Ñ‚Ğ¸Ğ¿ Ğ´Ğ°Ğ½Ğ½Ñ‹Ñ… Ñ ĞºĞ¾Ñ‚Ğ¾Ñ€Ñ‹Ğ¼ Ñ…Ğ¾Ñ‚Ğ¸Ñ‚Ğµ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ°Ñ‚ÑŒ : \n1-int\n2-float\n3-char*" << std::endl;
+		int answ = input_int(0,3);
+		switch (answ-1) {
+		case 0: {
+			int s1 = input_int(0, 10);
+			int* masi;
 		masi = new int[s1];
 		for (int i = 0; i < s1; i++) {
 			masi[i] = input_int(0, 1000);
 		}
-		float *masf;
+		output(masi, s1);
+		delete[]masi; break;
+		}
+		case 1: {int s2 = input_int(0, 10);
+			float *masf;
 		masf = new float[s2];
 		for (int i = 0; i < s2; i++) {
 			masf[i] = input_float(0, 1000);
 		}
-		char* ms[10];
+		output(masf, s2);
+		float d = 3;
+		int g=poisk(masf,d,s2);
+		std::cout << "\n" << g;
+		delete[]masf;
+		break; }
+			case2: {int s3 = input_int(0, 10);
+				char* ms[10];
 		ms[10] = new char[s3];
 		for (int i = 0; i < s3; i++) {
 			std::cin >> ms[i][10];
 		}
-		std::cout << "Âûáåğèòå òèï äàííûõ ñ êîòîğûì õîòèòå ğàáîòàòü : \n1-int\n2-float\n3-char\n4-char*" << std::endl;
-		float d = 3;
-		int g=poisk(masf,d,s2);
-		std::cout << "\n" << g;
-		delete[]masi;
-		delete[]masf;
-		//delete[]ms;
+		delete[]ms;
+		break; }
+		}
 		return 0;
 	}
 	int input_int(int min, int max) {
@@ -58,7 +73,7 @@ int poisk(char** mas,char* str,int size) {
 		while (!(std::cin >> a) || a > max || a < min) {
 			std::cin.clear();
 			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << "Ïîâòîğèòå ââîä\n";
+			std::cout << "ĞŸĞ¾Ğ²Ñ‚Ğ¾Ñ€Ğ¸Ñ‚Ğµ Ğ²Ğ²Ğ¾Ğ´\n";
 		}
 		return a;
 	}
@@ -67,11 +82,8 @@ int poisk(char** mas,char* str,int size) {
 		while (!(std::cin >> a) || a > max || a < min) {
 			std::cin.clear();
 			std::cin.ignore(std::cin.rdbuf()->in_avail());
-			std::cout << "Ïîâòîğèòå ââîä\n";
+			std::cout << "ĞŸĞ¾Ğ²Ñ‚Ğ¾Ñ€Ğ¸Ñ‚Ğµ Ğ²Ğ²Ğ¾Ğ´\n";
 		}
 		return a;
 	}
-	template<typename T>
-	void output(T *arr, int size){
-
-	}
+	
