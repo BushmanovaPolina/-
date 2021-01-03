@@ -26,14 +26,14 @@ public:
 	{
 		if (this->error == 1)
 		{
-			cout << "Îøèáêà ââîäà! Ââåäåíî íå ÷èñëî òèïà int!" << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°! Ð’Ð²ÐµÐ´ÐµÐ½Ð¾ Ð½Ðµ Ñ‡Ð¸ÑÐ»Ð¾ Ñ‚Ð¸Ð¿Ð° int!" << endl;
 		}
 		if (this->error == 2)
 		{
-			cout << "Îøèáêà ââîäà! Ââåäåíî íå ÷èñëî òèïà double!" << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ° Ð²Ð²Ð¾Ð´Ð°! Ð’Ð²ÐµÐ´ÐµÐ½Ð¾ Ð½Ðµ Ñ‡Ð¸ÑÐ»Ð¾ Ñ‚Ð¸Ð¿Ð° double!" << endl;
 		}if (this->error == 4)
 		{
-			cout << "Îøèáêà! Ñòýê ïóñò! " << endl;
+			cout << "ÐžÑˆÐ¸Ð±ÐºÐ°! Ð¡Ñ‚ÑÐº Ð¿ÑƒÑÑ‚! " << endl;
 		}
 	}
 };
@@ -138,8 +138,8 @@ public:
 	}
 	~automobile() {};
     void print(){
-			cout << "Óíèêàëüíûé íîìåð àâòîìîáèëÿ - " << this->id << endl;
-			cout << "ÔÈÎ âëàäåëüöà àâòîìîáèëÿ - " << this->name << endl;
+			cout << "Ð£Ð½Ð¸ÐºÐ°Ð»ÑŒÐ½Ñ‹Ð¹ Ð½Ð¾Ð¼ÐµÑ€ Ð°Ð²Ñ‚Ð¾Ð¼Ð¾Ð±Ð¸Ð»Ñ - " << this->id << endl;
+			cout << "Ð¤Ð˜Ðž Ð²Ð»Ð°Ð´ÐµÐ»ÑŒÑ†Ð° Ð°Ð²Ñ‚Ð¾Ð¼Ð¾Ð±Ð¸Ð»Ñ - " << this->name << endl;
 		}
 	friend class Stack<automobile>;
 	friend void input_id(automobile &avt);
@@ -154,16 +154,16 @@ void input_id(automobile &avto) {
 	bool a = true;
 	do
 	{
-		cout << "Ââåäèòå id: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ id: ";
 		cin >> ID;
 		if (cin.fail())
-			cout << "Ïîâòîðèòå ïîïûòêó" << endl;
+			cout << "ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ Ð¿Ð¾Ð¿Ñ‹Ñ‚ÐºÑƒ" << endl;
 		else
 			a = false;
 		cin.clear();
 		cin.ignore(cin.rdbuf()->in_avail());
 	} while (a);
-	cout << "Ââåäèòå ÔÈÎ âëàäåëüöà àâòîìîáèëÿ - ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¤Ð˜Ðž Ð²Ð»Ð°Ð´ÐµÐ»ÑŒÑ†Ð° Ð°Ð²Ñ‚Ð¾Ð¼Ð¾Ð±Ð¸Ð»Ñ - ";
 	cin >> fio;
 	set_id(ID, fio, avto);
 };
