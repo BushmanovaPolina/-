@@ -278,20 +278,7 @@ void File::Search()
 		/*fs.read((char*)&ms[i], sizeof(ms[i]));*/
 		i++;
 	}
-	/*cout << "Enter workshop (A, B, C): ";
-	cin >> c;
-	cout << "Searching results: " << endl;
-	int count = 0;
-	for (int i = 0; i < 10; i++)
-	{
-		if (ms[i].category == c)
-		{
-			cout << "____________________________________" << endl;
-			cout << ms[i] << endl;
-			count = count + ms[i].amount;
-		}
-	}
-	cout << "Total number of products in this category: " << count << endl;*/
+	
 	fs.close();
 }
 
