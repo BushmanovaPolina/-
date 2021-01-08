@@ -49,9 +49,6 @@ public:
 		this->data = data;
 		this->pNext = pNext;
 	}
-	T get_data() {
-		return data;
-	}
 };
 
 template<typename T>
@@ -74,19 +71,23 @@ public:
 	}
 	Iterator operator+(int n)
 	{
-		return *(pointer + n);
+		return (pointer + n);
 	}
-	Node operator++(int n)
+	Iterator operator++(int n)
 	{
-		return *pointer++;
+		pointer = pointer->pNext;
+		return pointer;
 	}
-	Iterator operator*()
+	T &operator*()
 	{
-		return *pointer;
+		return pointer->data;
 	}
 	bool operator!= (const Iterator& it)
 	{
 		return pointer != it.pointer;
+	}
+	T get_data() {
+		return pointer->data;
 	}
 };
 
@@ -107,16 +108,23 @@ public:
 	void push(T data);
 	Iterator<T> begin()
 	{
-		return (this->head);
+		return head;
 	}
 	Iterator<T> end()
 	{
 		Node<T>* current = this->head;
-		for (int i = 0; i < Size; i++)
+		for (int i = 0; i < Size-1; i++)
 		{
 			current = current->pNext;
 		}
 		return current;
+	}
+	void output(Iterator<T> begin, Iterator<T> end) {
+		Iterator<T> it = begin;
+		for (it; it != end; it++) {
+			cout << *it << endl;
+		}
+		cout << *end << endl;
 	}
 private:
 	int Size;
