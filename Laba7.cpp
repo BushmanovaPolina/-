@@ -145,13 +145,10 @@ int main()
 				}
 				st1.push(value1[i]);
 			}
-			Iterator<int> it1(st1.begin());
+			Iterator<int> it1=st1.begin(),it2=st1.end();
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st1.GetSize(); i++)
-			{
-				cout << st1[i] << endl;
-			}
+			st1.output(it1, it2);
 			cout << "__________________________________________" << endl;
 			cout << "Отсортированный стэк:" << endl;
 			Sort(n, value1);
@@ -181,10 +178,7 @@ int main()
 			st1.push(temp);
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st1.GetSize(); i++)
-			{
-				cout << st1[i] << endl;
-			}
+			st1.output(st1.begin(), st1.end());
 			delete[] value1;
 			break; }
 		case 2: {
@@ -226,13 +220,9 @@ int main()
 				}
 				st2.push(value2[i]);
 			}
-			Iterator<double> it1(st2.begin());
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st2.GetSize(); i++)
-			{
-				cout << st2[i] << endl;
-			}
+			st2.output(st2.begin(), st2.end());
 			cout << "__________________________________________" << endl;
 			cout << "Отсортированный стэк :" << endl;
 			Sort(n, value2);
@@ -262,10 +252,7 @@ int main()
 			st2.push(temp);
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st2.GetSize(); i++)
-			{
-				cout << st2[i] << endl;
-			}
+			st2.output(st2.begin(), st2.end());
 			delete[] value2;
 			break; }
 		case 3: {int n;
@@ -293,17 +280,10 @@ int main()
 				cin >> value3[i];
 				st3.push(value3[i]);
 			}
-			/*Iterator<char> it=st3.begin();
-			for (it; it!=st3.end(); it++)
-			{
-				cout << it.get_data() << endl;
-			}*/
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st3.GetSize(); i++)
-			{
-				cout << st3[i] << endl;
-			}
+			Iterator<char> it=st3.begin(),it2=st3.end();
+			st3.output(it, it2);
 			cout << "__________________________________________" << endl;
 			cout << "Отсортированный стэк :" << endl;
 			Sort(n, value3);
@@ -320,10 +300,8 @@ int main()
 			st3.push(temp);
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < st3.GetSize(); i++)
-			{
-				cout << st3[i] << endl;
-			}
+			it = st3.begin(), it2 = st3.end();
+			st3.output(it, it2);
 			delete[] value3; 
 			break; }
 		case 4: {
@@ -351,13 +329,16 @@ int main()
 				cout << "_________________________\n";
 				avto.push(value4[i]);
 			}
-			Iterator<automobile> it4(avto.begin());
+			Iterator<automobile> it1=avto.begin(),it2=avto.end();
 			cout << "__________________________________________" << endl;
 			cout << "Стэк : " << endl;
-			for (int i = 0; i < avto.GetSize(); i++)
+			for (it1;it1!=it2; it1++)
 			{
-				avto[i].print();
+				automobile temp = it1.data;
+				temp.print();
 			}
+			automobile temp = it2.get_data();
+			temp.print();
 			delete[] value4;
 			break; }
 		default: {
