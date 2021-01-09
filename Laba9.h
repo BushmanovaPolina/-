@@ -160,15 +160,6 @@ std::vector<MySpace::automobile>::iterator MySpace::Algorithm::third(std::vector
 	std::cout << "Введите id автомобиля, который хотите удалить" << std::endl;
 	int id;
 	std::cin >> id;
-	it = begin;
-	while (it !=end) {
-		std::cout << "Элемент векора:" << std::endl;
-		MySpace::automobile avto;
-		avto = *it;
-		avto.print();
-		std::cout << std::endl;
-		++it;
-	}
 	std::cout << "===================================================" << std::endl;
 	it = begin;
 	int flg = 0;
@@ -186,7 +177,7 @@ std::vector<MySpace::automobile>::iterator MySpace::Algorithm::third(std::vector
 		else it++;
 	}
 	try {
-		if (flg != 1) { std::cout << "Нет такого автомобиля,выход из программы\n"; throw 1; }
+		if (flg == 0) { std::cout << "Нет такого автомобиля,выход из программы\n"; throw 1; }
 		else return it;
 	}
 	catch (int i) {
