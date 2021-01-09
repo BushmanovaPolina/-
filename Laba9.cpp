@@ -106,7 +106,7 @@ int main() {
 				std::cout << std::endl;
 				++it;
 			}
-			std::cout << "===================================================" << std::endl;
+				std::cout << "===================================================" << std::endl;
 			std::cout << "Удаление элементов вектора, кроме одного" << std::endl;
 			for (int i = 0; i < 6; i++) {
 				vec.pop_back();
@@ -130,12 +130,9 @@ int main() {
 			vec.push_back(MySpace::automobile(66666, "Павлов Павел Павлович", 600));
 			std::vector<MySpace::automobile>::iterator it;
 			std::vector<MySpace::automobile>::iterator temp;
-			it = vec.begin(); 
-		    temp=a.third(vec.begin(), vec.end()); 
-			vec.erase(temp);
 			it = vec.begin();
+			std::cout << "===================================================" << std::endl;
 			while (it != vec.end()) {
-				std::cout << "===================================================" << std::endl;
 				std::cout << "Элемент векора:" << std::endl;
 				MySpace::automobile avto;
 				avto = *it;
@@ -143,26 +140,14 @@ int main() {
 				std::cout << std::endl;
 				++it;
 			}
+			it = vec.begin();
+			temp = a.third(vec.begin(), vec.end());
+			vec.erase(temp);
 			std::cout << "Добавление элемента вектора" << std::endl;
 			vec.push_back(MySpace::automobile(77777, "Павлов Павел Павлович", 700));
 			it = vec.begin();
-			while (it != vec.end()) {
 				std::cout << "===================================================" << std::endl;
-				std::cout << "Элемент векора:" << std::endl;
-				MySpace::automobile avto;
-				avto = *it;
-				avto.print();
-				std::cout << std::endl;
-				++it;
-			}
-			std::cout << "===================================================" << std::endl;
-			std::cout << "Удаление элементов вектора, кроме одного" << std::endl;
-			for (int i = 0; i < 6; i++) {
-				vec.pop_back();
-			}
-			it = vec.begin();
 			while (it != vec.end()) {
-				std::cout << "===================================================" << std::endl;
 				std::cout << "Элемент векора:" << std::endl;
 				MySpace::automobile avto;
 				avto = *it;
