@@ -1,23 +1,25 @@
 #include "Laba8.h"
-
-Stack::Stack()
+template<typename T>
+Stack<T>::Stack()
 {
 	Size = 0;
 	head = nullptr;
 }
 
-Stack::~Stack()
+template<typename T>
+Stack<T>::~Stack()
 {
 	clear();
 }
 
-void Stack::pop()
+template<typename T>
+void Stack<T>::pop()
 {
 	try
 	{
 		if (Size == 0)
 		{
-			throw 1;
+			throw 4;
 		}
 	}
 	catch (int i)
@@ -26,13 +28,14 @@ void Stack::pop()
 		ex.Print();
 		return;
 	}
-	ATS* temp = head;
+	Node<T>* temp = head;
 	head = head->pNext;
 	delete temp;
 	Size--;
 }
 
-void Stack::clear()
+template<typename T>
+void Stack<T>::clear()
 {
 	while (Size)
 	{
@@ -40,38 +43,66 @@ void Stack::clear()
 	}
 }
 
-ATS& Stack::operator[](const int index)
+template<typename T>
+T& Stack<T>::operator[](const int index)
 {
 	int counter = 0;
-	ATS* current = this->head;
+	Node<T>* current = this->head;
 	while (current != nullptr)
 	{
 		if (counter == index)
 		{
-			return *current;
+			return current->data;
 		}
 		current = current->pNext;
 		counter++;
 	}
 }
 
-void Stack::push(string _date, string _kod, string _tariff, int _time, long int _number_c, long int _number_a)
+template<typename T>
+void Stack<T>::push(T data)
 {
-	head = new ATS(_date, _kod, _tariff, _time, _number_c, _number_a,head);
+	head = new Node<T>(data, head);
 	Size++;
 }
 
-ostream& operator<<(ostream& out, const ATS& ats)
+template<typename T>
+void Sort(int n, T* ms)
 {
-	out << "Дата: " << ats.date << endl;
-	out << "Код и название города: " << ats.kod << endl;
-	out << "Время разговора: " << ats.time << endl;
-	out << "Тариф: " << ats.tariff << endl;
-	out << "Номер телефона в этом городе: " << ats.number_c << endl;
-	out << "Номер телефона абонента: " << ats.number_a << endl;
+	int j;
+	T m;
+	for (int i = 1; i < n; ++i)
+	{
+		j = i - 1;
+		m = ms[i];
+		while (j >= 0 && m < ms[j])
+		{
+			ms[j-- + 1] = ms[j];
+		}
+		ms[j + 1] = m;
+	}
+}
+
+template<typename T>
+ostream& operator<<(ostream& out, const Node<T>& node)
+{
+	out << node.data;
 	return out;
 }
 
+template<typename T>
+ostream& operator<<(ostream& out, const Iterator<T>& it)
+{
+	out << *it;
+	return out;
+}
+void output(ATS& ats) {
+	cout << "Дата звонка: " << ats.day << "." << ats.month << "." << ats.year << endl;
+	cout << "Код и город: " << ats.kod <<" "<< ats.country << endl;
+	cout << "Продолжительность звонка: " << ats.time << endl;
+	cout << "Тариф: " << ats.tariff << endl;
+	cout << "Номер телефона в городе: " << ats.number_c << endl << "Номер телефона абонента: " << ats.number_a << endl;
+}
 void InsertSort(int n, int* ms)
 {
 	int j;
@@ -89,7 +120,7 @@ void InsertSort(int n, int* ms)
 	return;
 }
 
-int File::Del(int index, int n, Stack& st)
+int File::Del(int index, int n, Stack<ATS>& st)
 {
 	fstream fs;
 	fs.open(path, fstream::in | fstream::binary | fstream::out);
@@ -136,7 +167,7 @@ int File::Del(int index, int n, Stack& st)
 void File::ReadTextBin()
 {
 	char* msg;
-	msg = new char[10];
+	msg = new char[100];
 	fstream fs;
 	fs.open(path, fstream::in | fstream::binary);
 	try
@@ -152,9 +183,9 @@ void File::ReadTextBin()
 		ex.Print();
 		return;
 	}
-	fs.read(msg, 10);
+	fs.read(msg, 100);
 	int count = 0;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		if (msg[i] >= 97 && msg[i] <= 122 || msg[i] >= 65 && msg[i] <= 90)
 		{
@@ -169,13 +200,8 @@ void File::ReadTextBin()
 	fs.close();
 }
 
-void File::Sort(int n, Stack &st)
+void File::Sort_time(int n, Stack<ATS> &st)
 {
-	if (n == 1)
-	{
-		this->ReadBin(n);
-		return;
-	}
 	fstream fs;
 	fs.open(path, fstream::in | fstream::binary | fstream::out);
 	try
@@ -245,12 +271,90 @@ void File::Sort(int n, Stack &st)
 				this->WriteBin(ms[j]);
 			}
 		}
-	}
-	this->ReadBin(n);
+	}	
 	fs2.close();
+    this->ReadBin(n);
 	delete[] ms;
 	delete[] m;
 }
+void File::Sort_day(int n, Stack<ATS> &st)
+{
+	fstream fs;
+	fs.open(path, fstream::in | fstream::binary | fstream::out);
+	try
+	{
+		if (!fs.is_open())
+		{
+			throw 1;
+		}
+	}
+	catch (int i)
+	{
+		Exception ex(i);
+		ex.Print();
+		return;
+	}
+	int *m2;
+	m2 = new int[n];
+	ATS* ms;
+	ms = new ATS[n];
+	int i = 0;
+	for (int k = 0; k < n; k++)
+	{
+		fs.read((char*)&ms[i], sizeof(ms[i]));
+		m2[i] = ms[i].day;
+		i++;
+	}
+	InsertSort(n, m2);
+	fs.close();
+	fstream fs1;
+	fs1.open(path, fstream::binary | fstream::out | fstream::trunc);
+	try
+	{
+		if (!fs1.is_open())
+		{
+			throw 1;
+		}
+	}
+	catch (int i)
+	{
+		Exception ex(i);
+		ex.Print();
+		return;
+	}
+	fs1.close();
+	fstream fs2;
+	fs2.open(path, fstream::binary | fstream::out);
+	try
+	{
+		if (!fs2.is_open())
+		{
+			throw 1;
+		}
+	}
+	catch (int i)
+	{
+		Exception ex(i);
+		ex.Print();
+		return;
+	}
+	cout << "Сортировка по дате:  " << endl;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (ms[j].day == m2[i])
+			{
+				this->WriteBin(ms[j]);
+			}
+		}
+	}
+	fs2.close();
+	this->ReadBin(n);
+	delete[] ms;
+	delete[] m2;
+}
+
 
 void File::Search()
 {
@@ -269,16 +373,38 @@ void File::Search()
 		ex.Print();
 		return;
 	}
-	ATS ms[10];
-	int i = 0;
-	char c;
-	while (!fs.eof())
+	ATS ms[5];
+	int i = 0,d=0,m=0,y=0,t=0;
+	while (i!=5)
 	{
-		fs.read(reinterpret_cast<char*>(&ms[i]), sizeof(ms[i]));
-		/*fs.read((char*)&ms[i], sizeof(ms[i]));*/
+		fs.read((char*)&ms[i], sizeof(ms[i]));
+		output(ms[i]);
+		cout << "=============================" << endl;
 		i++;
 	}
-	
+	cout << "Введите условия для поиска: \nПродолжительность звонка: ";
+	cin >> t;
+	cout << "\nДень: ";
+	cin >> d;
+	if (d > 31)throw 3;
+	cout << "\nМесяц: ";
+	cin >> m;
+	if (m > 12)throw 3;
+	cout << "\nГод: ";
+	cin >> y;
+	if (y > 2020)throw 3;
+	long int date = d + m * 31 + y * 365;
+	cout << "Результаты поиска(Звонки позже введенной даты и не короче введенного времени): " << endl;
+	for (int i = 0; i < 5; i++)
+	{
+		long date1 = ms[i].day + ms[i].month * 31 + ms[i].year * 365;
+		if(ms[i].time>t)
+		if (date1>date)
+		{
+				cout << "____________________________________" << endl;
+				output(ms[i]);
+		}
+	}
 	fs.close();
 }
 
@@ -300,7 +426,6 @@ void File::WriteBin(ATS ats)
 		return;
 	}
 	fs.write((char*)&ats, sizeof(ats));
-	/*fs.write(reinterpret_cast<char*>(&pr), sizeof(pr));*/
 	fs.close();
 }
 
@@ -349,7 +474,7 @@ void File::ReadBin(int n)
 	ATS ats;
 	while (fs.read((char*)&ats, sizeof(ATS)))
 	{
-		cout << ats;
+		output(ats);
 		cout << "____________________________________" << endl;
 	}
 	fs.close();
@@ -387,14 +512,8 @@ void File::ReadText()
 int main()
 {
 	system("chcp 1251>null");
-	Stack st;
+	Stack<ATS> st;
 	File file2("2.bin");
-	string* _date;
-	string* _kod;
-	string* _tariff;
-	int* _time;
-	long int* _number_c;
-	long int* _number_a;
 	int n, index, var, ch;
 	cout << "Выберите с каким файлом работать? 1-текстовый, 2-бинарный";
 	cin >> var;
@@ -411,61 +530,55 @@ int main()
 	if (var == 2)
 	{
 		system("CLS");
-		cout << "Ввод данных в файл: " << endl;
-		cout << "Введите количество элементов: ";
-		try
-		{
-			cin >> n;
-			if (cin.fail())
-			{
-				throw 0;
-			}
+		ATS temp = ATS(4, 1, 2019, "Минск", "017", "A1", 360, 1234567, 80171234567);
+		st.push(temp);
+		temp = ATS(8, 2, 2019, "Минск", "017", "A1", 300, 1234567, 80171234567);
+		st.push(temp);
+		temp = ATS(14, 3, 2020, "Минск", "017", "A1", 250, 1234567, 80171234567);
+		st.push(temp);
+		temp = ATS(25, 5, 2021, "Минск", "017", "A1", 340, 1234567, 80171234567);
+		st.push(temp);
+		temp = ATS(17, 9, 2020, "Минск", "017", "A1", 400, 1234567, 80171234567);
+		st.push(temp);
+		fstream fs;
+		fs.open("2.bin", fstream::out | fstream::binary);
+		fs.close();
+		for (int i = 0; i < st.GetSize(); i++) {
+			file2.WriteBin(st[i]);
 		}
-		catch (int i)
+		cout << "\nПрочитать файл - 1" << endl;
+		cout << "Поиск по файлу - 2" << endl;
+		cout << "Сортировка по времени - 3" << endl;
+		cout << "Сортировка по дате - 4" << endl;
+		cout << "Удаление - 5" << endl;
+		cin >> ch;
+		if (ch == 1)
 		{
-			Exception ex(i);
-			ex.Print();
-			return 0;
+			cout << "Файл: " << endl;
+			file2.ReadBin(st.GetSize());
 		}
-		_date = new string[n];
-		_kod = new string[n];
-		_time = new int[n];
-		_number_c = new long int[n];
-		_number_a = new long int[n];
-		_tariff = new string[n];
-		for (int i = 0; i < n; i++)
+		if (ch == 2)
 		{
-			cout << "Введите элемент [" << i << "]: " << endl;
-			cout << "Дата: ";
+			file2.Search();
+		}
+		if (ch == 3)
+		{
+			file2.Sort_time(st.GetSize(), st);
+		}
+		if (ch == 4)
+		{
+			file2.Sort_day(st.GetSize(), st);
+		}
+		if (ch == 5)
+		{
+			cout << "Файл до удаления: ";
+			fstream fs;
+			fs.open("2.bin", fstream::in | fstream::binary | fstream::out);
 			try
 			{
-				cin >> _date[i];
-				/*if (_date[i] < 65 || _date[i] > 67)
+				if (!fs.is_open())
 				{
-					throw 2;
-				}*/
-			}
-			catch (int i)
-			{
-				Exception ex(i);
-				ex.Print();
-				return 0;
-			}
-			cout << "Код и название города: ";
-			cin >> _kod[i];
-			cout << "Тариф: ";
-			cin >> _tariff[i];
-			cout << "Номер в городе :";
-			cin >> _number_c[i];
-			cout << "Номер абонента :";
-			cin >> _number_a[i];
-			cout << "Время: ";
-			try
-			{
-				cin >> _time[i];
-				if (cin.fail())
-				{
-					throw 0;
+					throw 1;
 				}
 			}
 			catch (int i)
@@ -474,29 +587,14 @@ int main()
 				ex.Print();
 				return 0;
 			}
-			ATS ats(_date[i], _kod[i], _tariff[i], _time[i],_number_c[i],_number_a[i]);
-			file2.WriteBin(ats);
-		}
-		cout << "\nПрочитать файл - 1" << endl;
-		cout << "Поиск по файлу - 2" << endl;
-		cout << "Сортировка - 3" << endl;
-		cout << "Удаление - 4" << endl;
-		cin >> ch;
-		if (ch == 1)
-		{
-			cout << "Файл: " << endl;
-			file2.ReadBin(n);
-		}
-		if (ch == 2)
-		{
-			file2.Search();
-		}
-		if (ch == 3)
-		{
-			file2.Sort(n, st);
-		}
-		if (ch == 4)
-		{
+			cout << "____________________________________" << endl;
+			ATS ats;
+			while (fs.read((char*)&ats, sizeof(ATS)))
+			{
+				output(ats);
+				cout << "____________________________________" << endl;
+			}
+			fs.close();
 			cout << "Введите номер элемента для удаления: ";
 			try
 			{
@@ -513,15 +611,9 @@ int main()
 				return 0;
 			}
 			int k;
-			k = file2.Del(index, n, st);
+			k = file2.Del(index, st.GetSize(), st);
 			n = k;
 		}
-		delete[] _date;
-		delete[] _kod;
-		delete[] _time;
-		delete[] _tariff;
-		delete[] _number_a;
-		delete[] _number_c;
 	}
 	return 0;
 }
