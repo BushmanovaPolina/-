@@ -54,9 +54,9 @@ public:
 template<typename T>
 class Iterator : public Node<T>
 {
+public:
 	Node<T>* pointer;
 	friend class automobile;
-public:
 	Iterator()
 	{
 		this->pointer = nullptr;
@@ -81,6 +81,9 @@ public:
 	T &operator*()
 	{
 		return pointer->data;
+	}
+	void operator=(T _data) {
+		pointer->data = _data;
 	}
 	bool operator!= (const Iterator& it)
 	{
@@ -130,6 +133,19 @@ public:
 		}
 		cout << *end << endl;
 	}
+	void Del(Iterator<T> it) {
+		Node<T>* current;
+		current = this->head;
+		if (current == it.pointer) {
+		 this->head = current->pNext;
+		}
+		else do
+		 {
+			current = current->pNext;
+		} while (current->pNext != it.pointer);
+			current->pNext = current->pNext->pNext;
+			this->Size--;
+	}
 private:
 	int Size;
 	Node<T>* head;
@@ -158,6 +174,15 @@ public:
 			cout << "ФИО владельца автомобиля - " << this->name << endl;
 			cout<<"Пробег автомобиля - "<<this->mileage<<endl;
 		}
+	int get_id() {
+		return this->id;
+	}
+	string get_name() {
+		return this->name;
+	}
+	int get_mileage() {
+		return this->mileage;
+	}
 	friend class Stack<automobile>;
 	friend void input_id(automobile &avt);
 	friend void set_id(int ID, string fio,int mil, automobile &avto) {
@@ -165,6 +190,10 @@ public:
 		avto.name = fio;
 		avto.mileage = mil;
 	};
+	bool operator==(automobile avto) {
+		if (this->id == avto.id || this->mileage == avto.mileage)return true;
+		else return false;
+	}
 };
 void input_id(automobile &avto) {
 	int ID,mil;
